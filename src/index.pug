@@ -14,7 +14,10 @@ html(lang="en")
                     a.menu__link(href=`/${menu.id}`)=menu.label
                     .menu__dropdown
                         h2=menu.label
-                        ul
+                        ul.mega-menu2
                             each menu2 in menu.secondMenuItemList
-                                li
+                                li.menu__drop2
                                     span=menu2.label
+                                    .menu__dropdown2
+                                        p aaa
+                                        p bbb
