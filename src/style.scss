@@ -1,7 +1,50 @@
+// reset CSS
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .menu__link {
     text-decoration: none;
+    padding: 0.5rem;
+    background-color: lightblue;
+    display: block;
+    text-align: center;
 
     &:hover {
-        text-decoration: underline;
+        background-color: darkblue;
+        color: white;
+
+        .menu__dropdown {
+            display: block;
+        }
     }
 }
+
+.mega-menu {
+    display: flex;
+    list-style: none;
+    justify-content: stretch;
+    align-items: stretch;
+
+    li {
+        flex-grow: 1;
+        width: 100%;
+    }
+}
+
+.menu__dropdown {
+    display: none;
+    position: absolute;
+    top: 34px;
+    left: 0;
+    right: 0;
+    height: 400px;
+}
+
+.menu__link-item:hover .menu__link + .menu__dropdown {
+        display: inherit;
+        background-color: #f2f2f2;
+    }
