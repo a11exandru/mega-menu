@@ -9,23 +9,47 @@ html(lang="en")
         link(rel="stylesheet", href="style.css")
     body
         ul.mega-menu
-            each menu, key in data.menu
+            each menu, key1 in data.menu
                 li.menu__link-item
                     a.menu__link(href=`/${menu.id}`)=menu.label
                     .menu__dropdown
                         h2=menu.label
                         ul
-                            each menu2 in menu.secondMenuItemList
-                                li.menu__drop2
+                            each menu2, key2 in menu.secondMenuItemList
+                                li.menu__drop2(data-key1=key1, data-key2=key2)
                                     span=menu2.label
                                     .menu__dropdown2
                                         h3.menu__label=menu2.label
                                         .list
                                             ul.list-1
                                                 each item in menu2.list1
-                                                    li.item__list
-                                                        a(href=item.link, class=item.bold?'bold-link':'')=item.label
+                                                    //- li.item__list
+                                                    //-     a(href=item.link, class=item.bold?'bold-link':'')=item.label
                                             ul.list-2
                                                 each item in menu2.list2
-                                                    li.item__list
-                                                        a(href=item.link, class=item.bold?'bold-link':'')=item.label
+                                                    //- li.item__list
+                                                    //-     a(href=item.link, class=item.bold?'bold-link':'')=item.label
+        script.
+            let menu = !{JSON.stringify(data.menu)}
+            console.log(menu)
+            document.querySelectorAll('.menu__drop2')
+                .forEach(mm => mm.addEventListener('mouseover', elem => {
+                    console.log(elem.currentTarget.dataset);
+                    const { key1, key2 } = elem.currentTarget.dataset;
+                    let list1= mm.querySelector('.menu__drop2 .list-1')
+                    //- console.log(key1, key2,list1);
+                    list1.innerHTML = '';
+
+                    if (menu[key1].secondMenuItemList[key2].list1) {
+                        menu[key1].secondMenuItemList[key2].list1.map(data => {
+                            let liItem = document.createElement('li');
+                            liItem.className = 'item__list';
+                            let atag = document.createElement('a');
+                            atag.href = data.link;
+                            atag.innerText = data.label;
+                            atag.className = data.bold ? 'bold-link':'';
+                            liItem.appendChild(atag);
+                            list1.appendChild(liItem);
+                        })
+                    }
+                }))

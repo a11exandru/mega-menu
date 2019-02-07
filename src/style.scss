@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 .menu__link {
     text-decoration: none;
     padding: 0.5rem;
@@ -101,7 +106,7 @@
 
 .bold-link {
     font-weight: bold;
-    color: green;
+    color: yellow;
 }
 
 .menu__label {
